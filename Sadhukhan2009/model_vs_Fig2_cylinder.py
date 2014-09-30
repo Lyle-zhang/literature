@@ -1,5 +1,6 @@
-# Sadhukhan2009 paper
-# 1-D transient heat conduction
+# 1-D transient heat conduction model compared to experimental values for a
+# cylindrical wood shape.
+# experimental data taken from Figure 2 (cylinder) in Sadhukhan2009
 
 # use Python 3 print function and division
 from __future__ import print_function

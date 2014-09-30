@@ -1,5 +1,6 @@
-# Kinetics from Ranzi2008 paper
-# plots reaction rate constant, K, as function of temperature, T
+# Plots reaction rate constant, K, as function of temperature, T from
+# cellulose, hemicellulose, and lignin components.
+# kinetics from Ranzi2008 paper
 
 # use Python 3 print function
 from __future__ import print_function
