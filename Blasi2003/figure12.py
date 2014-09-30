@@ -1,5 +1,4 @@
-# Correlation for devolatilization time as tv
-# where tv = time for 95% conversion
+# Correlation for devolatilization time as tv where tv = time for 95% conversion
 # Blasi2003, Eq. 2, Figure 12 example
 
 import numpy as np
