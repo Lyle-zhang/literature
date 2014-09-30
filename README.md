@@ -15,5 +15,29 @@ Correlations from section "Functions Which Cross One Limiting Solution". Plots s
 Drag coefficient, Cd, for non-spherical particles. Calculate terminal velocity, ut, from drag coefficient, Cd, and particle sphericity. See page 150, Equation 18 and Table 7.
 - Ganser, Gary H. "A rational approach to drag prediction of spherical and nonspherical particles." Powder Technology 77.2 (1993): 143-152.
 
+## Keshavarz2006
+An improved lumped capacitance method for Biot <= 20. Traditional method was typically restricted to Bi < 0.1.
+- Keshavarz, P., and M. Taheri. "An improved lumped analysis for transient heat conduction by using the polynomial approximation method." Heat and mass transfer 43.11 (2007): 1151-1156.
+
+## Kunii1991
+Calculate terminal velocity, ut, from ut* and dp* for different particle sphericities. See pages 80-83, Equations 28-29, and Equations 31-33 in the book. Applicable for sphericity from 0.5 to 1.0.
+- Kunii, D., and O. Levenspiel. "Fluidization Engineering, 2nd Ed.", 1991.
+
+## Ranzi2008
+Plots reaction rate constant, K, and chemical species as function of temperature, T from cellulose, hemicellulose, and lignin components. Note that Table 3 lists 7 reactions but 8 reaction rates are given.
+- Ranzi, Eliseo, et al. "Chemical kinetics of biomass pyrolysis." Energy & Fuels 22.6 (2008): 4292-4300.
+
+## Ranzi2013
+Plots chemical species as a function of time for cellulose, hemicellulose, and lignin biomass components. Lignin is divided into three groups as oxygen (lig-O), carbon (lig-C), and hydrogen (lig-H) rich components. Reaction rate constants are also plotted.
+- Ranzi, Eliseo, et al. "Kinetic modeling of the thermal degradation and combustion of biomass." Chemical Engineering Science 110 (2014): 2-12.
+
+## Sadhukhan2009
+1-D transient heat conduction model compared to experimental values for a cylindrical and spherical wood shapes. Experimental data taken from Figures 1 (cylinder) and 2 (sphere).
+- Sadhukhan, Anup Kumar, Parthapratim Gupta, and Ranajit Kumar Saha. "Modelling of pyrolysis of large wood particles." Bioresource technology 100.12 (2009): 3134-3139.
+
+## Santos2010
+Horio and Nonaka bubble diameter correlation using Equation 14.30 on page 322. Bed expansion facter, fbexp, and expanded bed height, zexp, for a fluidized bed using Equations 14.7 and 14.18 from pages 318-320. Calculate terminal velocity, ut, for a near spherical particle using Equations 4.12-4.15 on page 86.
+- Marcio L. de Souza-Santos, "Solid Fuels Combustion and Gasification: Modeling, Simulation, and Equipment Operations", 2nd Ed., 2010.
+
 ## License
 Code in this repository is available under the MIT license. See the LICENSE file for more info.
