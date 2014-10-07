@@ -7,6 +7,11 @@ Correlation for devolatilization time as tv where tv = time for 95% conversion. 
 - Di Blasi, Colomba, and Carmen Branca. "Temperatures of wood particles in a hot sand bed fluidized by 
 nitrogen." Energy & fuels 17.1 (2003): 247-254.
 
+## Diego2003
+Correlation for devolatilization time that considers moisture content within a wood particle. Refer to Equations 2-7 in the paper for more details.
+- De Diego, L. F., et al. "Effect of moisture content on devolatilization times of pine wood particles in a 
+fluidized bed." Energy & fuels 17.2 (2003): 285-290.
+
 ## Churchill1974
 Correlations from section "Functions Which Cross One Limiting Solution". Plots should be same as in Figures 9 and 10 on page 41.
 - Churchill, Stuart W., and R. Usagi. "A standardized procedure for the production of correlations in the form of a common empirical equation." Industrial & Engineering Chemistry Fundamentals 13.1 (1974): 39-44.
