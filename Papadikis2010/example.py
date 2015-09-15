@@ -1,5 +1,5 @@
 """
-Read in data from CSV file then plot.
+Example of plotting data from a CSV file for Papadikis 2010 data.
 """
 
 # libraries and packages

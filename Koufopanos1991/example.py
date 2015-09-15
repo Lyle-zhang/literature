@@ -1,5 +1,5 @@
 """
-Read in data from CSV file then plot.
+Example of plotting data from a CSV file for Koufopanos 1991.
 """
 
 # libraries and packages
@@ -40,7 +40,6 @@ py.grid()
 # -----------------------------------------------------------------------------
 
 # parameters
-
 Ti = 293
 Tinf = 673
 

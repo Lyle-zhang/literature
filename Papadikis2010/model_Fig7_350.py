@@ -1,5 +1,5 @@
 """
-Compare 1-D transient heat conduction model to Papadikis2010a for d=350um
+Compare 1-D transient heat conduction model to Papadikis2010a for d = 350um
 """
 
 import numpy as np

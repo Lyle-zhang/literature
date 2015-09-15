@@ -1,5 +1,5 @@
 """
-Compare 1-D transient heat conduction model to Koufopanos1991 Figure 5a
+Compare 1-D transient heat conduction model to Sadhukhan 2009 Figure 2 cylinder
 """
 
 import numpy as np

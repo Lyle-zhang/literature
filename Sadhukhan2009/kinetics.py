@@ -1,8 +1,5 @@
 """
-Kinetic Reaction Scheme Functions for Fast Pyrolysis of Biomass.
-
-Each function is for a particular kinetic scheme.
-Reference for each scheme is provided as main author and publication year.
+Function for kinetic reactions of biomass pyrolysis from Sadhukhan 2009.
 """
 
 # modules
@@ -13,6 +10,27 @@ import numpy as np
 # -----------------------------------------------------------------------------
     
 def kn(T, B, C1, C2, rhow, dt, i, H):
+    """
+    Kinetic reactions for biomass pyrolysis of a woody particle. Kinetic scheme
+    from Koufopanos 1991 paper.
+    
+    Example:
+        B[i], C1[i], C2[i], g = kn(T, B, C1, C2, rhow, dt, i, H)
+    Inputs:
+        T = temperature, K
+        B = mass fraction of biomass, (-)
+        C1 = mass fraction of char 1, (-)
+        C2 = mass fraction of char 2, (-)
+        rhow = density of wood, kg/m^3
+        dt = time step, s
+        i = row index
+        H = heat of reaction, J/kg
+    Output:
+        B[i] = biomass mass fraction vector for row index i
+        C1[i] = char 1 mass fraction vector for row index i
+        C2[i] = char 2 mass fraction vector for row index i
+        g = heat generation, W/m^3
+    """
     
     R = 0.008314 # universal gas constant, kJ/mol*K
     
