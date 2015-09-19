@@ -1,5 +1,5 @@
 """
-Compare 1-D transient heat conduction model to Koufopanos1991 Figure 5a
+Compare 1-D transient heat conduction model to Figure 10 in Pyle 1984
 """
 
 import numpy as np
@@ -10,19 +10,19 @@ from kinetics import kn
 # Parameters
 #------------------------------------------------------------------------------
 
-rhow = 650      # density of wood, kg/m^3
-d = 0.02        # biomass particle diameter, m
-h = 65          # heat transfer coefficient, W/m^2*K
-Ti = 293        # initial particle temp, K
-Tinf = 623      # ambient temp, K
-H = -235000     # heat of reaction, J/kg
+rhow = 450      # density of wood, kg/m^3
+d = 0.006       # biomass particle diameter, m
+h = 60          # heat transfer coefficient, W/m^2*K
+Ti = 303        # initial particle temp, K
+Tinf = 780      # ambient temp, K
+H = -100000     # heat of reaction, J/kg
 
 # Shape factor, time, and node (radius point) vectors
 #------------------------------------------------------------------------------
 
 b = 1           # run model as a cylinder (b = 1) or as a sphere (b = 2)
 nt = 2000                       # number of time steps
-tmax = 1080                     # max time, s
+tmax = 150                      # max time, s
 dt = tmax/nt                    # time step, s
 t = np.arange(0, tmax+dt, dt)   # time vector
 
@@ -31,7 +31,7 @@ r = d/2     # radius of particle, m
 dr = r/nr   # radius step, delta r
 m = nr+1    # nodes from center m=0 to surface m=steps+1
 
-# Temperature and Density arrays, Mass Fraction vector
+# Temperature and Density arrays, Conversion vector
 #------------------------------------------------------------------------------
 
 # temperture array
@@ -45,16 +45,16 @@ pw = np.zeros((len(t), m))      # create array for wood density
 pc = np.zeros((len(t), m))      # create array for char density
 pg = np.zeros((len(t), m))      # create array for gas density
 
-pw[0] = rhow                    # initial wood density at all nodes
+pw[0] = rhow                 # initial wood density at all nodes
 
 # mass fraction array
 B = np.ones((len(t), m))
 C1 = np.zeros((len(t), m))
 C2 = np.zeros((len(t), m))
 
-# mass fraction vector
-# columns = average mass fraction of entire solid at a time step
-Ys = np.ones(len(t))   # create row vector for mass fraction, Ys=1 for all wood
+# conversion vector
+# columns = average conversion of entire solid at a time step
+Ys = np.zeros(len(t))   # create row vector for conversion, Ys=0 for all wood
 
 # Initial thermal properties 
 #------------------------------------------------------------------------------
@@ -98,7 +98,7 @@ for i in range(1, nt+1):
     cpbar = Yw*cpw + (1-Yw)*cpc
     kbar = Yw*kw + (1-Yw)*kc
     pbar = pw[i] + pc[i]
-    Ys[i] = np.mean(B[i] + C1[i] + C2[i])
+    Ys[i] = 1 - np.mean(pw[i])/rhow
     
 Tavg = [np.mean(row) for row in T]  # average temperature for entire particle
 
@@ -110,31 +110,36 @@ py.rcParams['lines.linewidth'] = 2
 py.rcParams['axes.grid'] = True
 
 # grab experiment data from csv file
-t1, phi = np.loadtxt('Fig5a_phi.csv', delimiter=',', unpack=True)
-t2, weight = np.loadtxt('Fig5a_weight.csv', delimiter=',', unpack=True)
-temp = phi*(Ti-Tinf)+Tinf   # convert dimensionless phi to Kelvin
+t1, Temp = np.loadtxt('Fig10Tcenter.csv', delimiter=',', unpack=True)
+t2, Mass = np.loadtxt('Fig10conv.csv', delimiter=',', unpack=True)
 
 # plot model vs data
 py.close('all')
 
 py.figure(1)
-py.plot(t, T[:, 0], '-g', label='center')
-py.plot(t, T[:, m-1], '-r', label='surface')
-py.plot(t, Tavg, '-b', label='avg')
-py.plot(t1*60, temp, 'og', label='axis')
+py.plot(t/60, T[:, 0], '-g', label='center')
+py.plot(t1, Temp, 'og', label='expmt')
 py.axhline(Tinf, c='k', ls='--', label='ambient')
 py.ylim(ymin=Ti-20)
 py.legend(loc='best', numpoints=1)
-py.xlabel('Time (s)')
+py.xlabel('Time (min)')
 py.ylabel('Temperature (K)')
 py.title(r'Temperatures for d={:.0f} $mm$, h={} $W/m^2K$'.format(d*1000, h))
 
 py.figure(2)
-py.plot(t, Ys, '-g', label='Ys')
-py.plot(t2*60, weight, 'og', label='weight')
+py.plot(t/60, Ys, '-g', label='Ys')
+py.plot(t2, Mass, 'og', label='expmt')
+py.axhline(1, c='k', ls='--')
 py.ylim([0, 1.1])
 py.legend(loc='best', numpoints=1)
-py.xlabel('Time (s)')
-py.ylabel('Residual Weight Fraction (-)')
+py.xlabel('Time (min)')
+py.ylabel('Conversion (-)')
+
+# remove top, right spines and tick marks
+ax = py.gca()
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+ax.xaxis.set_ticks_position('none')
+ax.yaxis.set_ticks_position('none')
 
 py.show()
