@@ -12,7 +12,7 @@ from kinetics import kn
 
 rhow = 450      # density of wood, kg/m^3
 d = 0.006       # biomass particle diameter, m
-h = 60          # heat transfer coefficient, W/m^2*K
+h = 55          # heat transfer coefficient, W/m^2*K
 Ti = 303        # initial particle temp, K
 Tinf = 780      # ambient temp, K
 H = -100000     # heat of reaction, J/kg
@@ -45,7 +45,7 @@ pw = np.zeros((len(t), m))      # create array for wood density
 pc = np.zeros((len(t), m))      # create array for char density
 pg = np.zeros((len(t), m))      # create array for gas density
 
-pw[0] = rhow                 # initial wood density at all nodes
+pw[0] = rhow                    # initial wood density at all nodes
 
 # mass fraction array
 B = np.ones((len(t), m))
@@ -117,25 +117,31 @@ t2, Mass = np.loadtxt('Fig10conv.csv', delimiter=',', unpack=True)
 py.close('all')
 
 py.figure(1)
-py.plot(t/60, T[:, 0], '-g', label='center')
-py.plot(t1, Temp, 'og', label='expmt')
+py.plot(t/60, T[:, 0], '-b', label='center')
+py.plot(t1, Temp, 'og', mec='g', label='expmt')
 py.axhline(Tinf, c='k', ls='--', label='ambient')
 py.ylim(ymin=Ti-20)
 py.legend(loc='best', numpoints=1)
 py.xlabel('Time (min)')
 py.ylabel('Temperature (K)')
-py.title(r'Temperatures for d={:.0f} $mm$, h={} $W/m^2K$'.format(d*1000, h))
+#py.title(r'Temperatures for d={:.0f} $mm$, h={} $W/m^2K$'.format(d*1000, h))
+
+# remove top, right spines and tick marks
+ax = py.gca()
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+ax.xaxis.set_ticks_position('none')
+ax.yaxis.set_ticks_position('none')
 
 py.figure(2)
-py.plot(t/60, Ys, '-g', label='Ys')
-py.plot(t2, Mass, 'og', label='expmt')
+py.plot(t/60, Ys, '-b', label='model')
+py.plot(t2, Mass, 'og', mec='g', label='expmt')
 py.axhline(1, c='k', ls='--')
 py.ylim([0, 1.1])
 py.legend(loc='best', numpoints=1)
 py.xlabel('Time (min)')
 py.ylabel('Conversion (-)')
 
-# remove top, right spines and tick marks
 ax = py.gca()
 ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)
