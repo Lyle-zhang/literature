@@ -16,7 +16,7 @@ t = np.linspace(0, 2, 100)  # time range, s
 # Function for residence time distribution
 #------------------------------------------------------------------------------
 
-def rtd(n, tau, t, q=2, r=2):
+def rtd(n, tau, t, q=1, r=1):
     """
     Residence time distribution function for stirred tank reactor.
     Assumes circulating flow, pumping action of stirrer, isotropic homogeneous 
@@ -30,7 +30,7 @@ def rtd(n, tau, t, q=2, r=2):
     OUTPUTS:
     rt = residence time distribution, 1/s
     EXAMPLE:
-    r = rtd(n, tau, t) or rtd(n, tau, t, q, r)
+    r = rtd(n, tau, t) or rtd(n, tau, t, q=2, r=3)
     """
     
     a = (n/tau)*(r/(r+q))**(1/n)    # term from Eq. 30
@@ -78,13 +78,13 @@ py.close('all')
 
 py.figure(1)
 py.plot(t, r1.real, 'r-', lw=2, label='n=1')
-py.plot(x1, y1, 'ro')
+py.plot(x1, y1, 'ro', mec='r')
 py.plot(t, r2.real, 'g-', lw=2, label='n=2')
-py.plot(x2, y2, 'go')
+py.plot(x2, y2, 'go', mec='g')
 py.plot(t, abs(r4.real), 'b-', lw=2, label='n=4')
-py.plot(x4, y4, 'bo')
+py.plot(x4, y4, 'bo', mec='b')
 py.plot(t, abs(r10.real), 'm-', lw=2, label='n=10')
-py.plot(x10, y10, 'mo')
+py.plot(x10, y10, 'mo', mec='m')
 py.xlabel('Time (s)')
 py.ylabel('Distribution function R(t) (1/s)')
 py.legend(loc='best', numpoints=1)
