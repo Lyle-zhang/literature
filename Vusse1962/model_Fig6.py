@@ -32,7 +32,6 @@ def rtd(n, tau, t, q=1, r=1):
     EXAMPLE:
     r = rtd(n, tau, t) or rtd(n, tau, t, q=2, r=3)
     """
-    
     a = (n/tau)*(r/(r+q))**(1/n)    # term from Eq. 30
     s = 0                           # initialize summation for g(at) Eq. 31
     

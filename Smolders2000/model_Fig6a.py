@@ -1,5 +1,5 @@
 """
-Compare Vusse 1962 RTD model to Figures 5, 6, and 7 in Berruti 1988 paper
+Compare Vusse 1962 RTD model to Figure 6 in Smolders 2000 paper
 """
 
 import numpy as np
@@ -42,18 +42,18 @@ def rtd(n, tau, t, q=1, r=1):
 # RTD model from Vusse 1962 
 # -----------------------------------------------------------------------------
 
-t = np.linspace(0, 20, 200)     # time range, s
+t = np.linspace(0, 25, 200)     # time range, s
 
-r5 = rtd(10, 1.8, t)            # Fig. 5, Exp. 4 in Berruti 1988
-r6 = rtd(13, 2.8, t)            # Fig. 6, Exp. 6 in Berruti 1988
-r7 = rtd(10, 3.2, t)            # Fig. 7, Exp. 9 in Berruti 1988
+r6a = rtd(4, 3.2, t)            # Fig. 6a in Smolders 2000
+r6b = rtd(6, 2.8, t)            # Fig. 6b in Smolders 2000
+r6c = rtd(5, 2.8, t)            # Fig. 6c in Smolders 2000
 
-# Data from Berruti 1988 paper
+# Data from Smolders 2000 paper
 # -----------------------------------------------------------------------------
 
-x5, y5 = np.loadtxt('fig5.csv', delimiter=",", unpack=True) # Figure 5
-x6, y6 = np.loadtxt('fig6.csv', delimiter=",", unpack=True) # Figure 6
-x7, y7 = np.loadtxt('fig7.csv', delimiter=",", unpack=True) # Figure 7
+x6a, y6a = np.loadtxt('fig6a.csv', delimiter=",", unpack=True) # Figure 6a
+x6b, y6b = np.loadtxt('fig6b.csv', delimiter=",", unpack=True) # Figure 6b
+x6c, y6c = np.loadtxt('fig6c.csv', delimiter=",", unpack=True) # Figure 6c
 
 # Plot
 # -----------------------------------------------------------------------------
@@ -61,29 +61,29 @@ x7, y7 = np.loadtxt('fig7.csv', delimiter=",", unpack=True) # Figure 7
 py.close('all')
 
 py.figure(1)
-py.plot(t, abs(r5.real), 'b-', lw=2, label='model')
-py.plot(x5, y5, 'g--', lw=2, label='exp')
+py.plot(t, abs(r6a.real), 'b-', lw=2, label='model')
+py.plot(x6a, y6a, 'g--', lw=2, label='exp')
 py.xlabel('Time (s)')
 py.ylabel('Distribution function R(t) (1/s)')
-py.title('Figure 5')
+py.title('Figure 6a')
 py.legend(loc='best', numpoints=1)
 py.grid()
 
 py.figure(2)
-py.plot(t, abs(r6.real), 'b-', lw=2, label='model')
-py.plot(x6, y6, 'g--', lw=2, label='exp')
+py.plot(t, abs(r6b.real), 'b-', lw=2, label='model')
+py.plot(x6b, y6b, 'g--', lw=2, label='exp')
 py.xlabel('Time (s)')
 py.ylabel('Distribution function R(t) (1/s)')
-py.title('Figure 6')
+py.title('Figure 6b')
 py.legend(loc='best', numpoints=1)
 py.grid()
 
 py.figure(3)
-py.plot(t, abs(r7.real), 'b-', lw=2, label='model')
-py.plot(x7, y7, 'g--', lw=2, label='exp')
+py.plot(t, abs(r6c.real), 'b-', lw=2, label='model')
+py.plot(x6c, y6c, 'g--', lw=2, label='exp')
 py.xlabel('Time (s)')
 py.ylabel('Distribution function R(t) (1/s)')
-py.title('Figure 7')
+py.title('Figure 6c')
 py.legend(loc='best', numpoints=1)
 py.grid()
 
