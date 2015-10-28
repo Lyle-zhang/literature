@@ -19,7 +19,7 @@ def rtd(n, tau, t, q=1, r=1):
     t = time vector, s
     q = feed rate, m^3/s
     r = circulation rate, m^3/s
-    OUTPUTS:
+    OUTPUT:
     rt = residence time distribution, 1/s
     EXAMPLE:
     r = rtd(n, tau, t) or rtd(n, tau, t, q=2, r=3)
@@ -34,9 +34,9 @@ def rtd(n, tau, t, q=1, r=1):
     
     # g as g(at) from Eq. 31 and rt as R(t) from Eq. 30
     g = (1/n)*s
+    # vector of complex values for residence time distribution
     rt = (q/(r+q))*((r+q)/r)**((n-1)/n)*(n/tau)*np.exp(-(n*t)/tau)*g
-    
-    return rt  # vector of complex values for residence time distribution
+    return rt
     
    
 # RTD model from Vusse 1962 
