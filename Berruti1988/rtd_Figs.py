@@ -1,5 +1,7 @@
 """
-Compare Vusse 1962 RTD model to Figures 5, 6, and 7 in Berruti 1988 paper
+Compare Vusse 1962 RTD model to Figures 5, 6, and 7 in Berruti 1988 paper.
+Bubbling bed experiment with bed material as silica sand at dp = 710 um and 
+density of rho = 2470 kg/m^3.
 """
 
 import numpy as np
@@ -39,7 +41,18 @@ def rtd(n, tau, t, q=1, r=1):
     return rt
     
    
-# RTD model from Vusse 1962 
+def weibull(x, lam, k):
+    """
+    Weibull distribution function.
+    x = time parameter
+    k = shape parameter
+    lam = lambda as scale parameter
+    """
+    w = (k/lam)*((x/lam)**(k-1))*np.exp(-(x/lam)**k)
+    return w
+    
+    
+# Vusse 1962 RTD model
 # -----------------------------------------------------------------------------
 
 t = np.linspace(0, 20, 200)     # time range, s
@@ -47,6 +60,13 @@ t = np.linspace(0, 20, 200)     # time range, s
 r5 = rtd(10, 1.8, t)            # Fig. 5, Exp. 4 in Berruti 1988
 r6 = rtd(13, 2.8, t)            # Fig. 6, Exp. 6 in Berruti 1988
 r7 = rtd(10, 3.2, t)            # Fig. 7, Exp. 9 in Berruti 1988
+
+# Compare Vusse 1962, CSTR series, and Weibull distribution
+# -----------------------------------------------------------------------------
+
+r5v = rtd(9, 2.2, t)            # Vusse model for Figure 5
+r5c = rtd(3, 2.9, t, r=1e-4)    # CSTR series for Figure 5
+r5w = weibull(t, 3, 2)          # Weibull distribution for Figure 5
 
 # Data from Berruti 1988 paper
 # -----------------------------------------------------------------------------
@@ -61,29 +81,40 @@ x7, y7 = np.loadtxt('fig7.csv', delimiter=",", unpack=True) # Figure 7
 py.close('all')
 
 py.figure(1)
-py.plot(t, abs(r5.real), 'b-', lw=2, label='model')
-py.plot(x5, y5, 'g--', lw=2, label='exp')
+py.plot(t, abs(r5.real), 'b-', lw=2, label='Vusse model')
+py.plot(x5, y5, 'g--', lw=2, label='Berruti exp')
 py.xlabel('Time (s)')
 py.ylabel('RTD function (1/s)')
-py.title('Figure 5')
+py.title('Berruti 1988, Figure 5')
 py.legend(loc='best', numpoints=1)
 py.grid()
 
 py.figure(2)
-py.plot(t, abs(r6.real), 'b-', lw=2, label='model')
-py.plot(x6, y6, 'g--', lw=2, label='exp')
+py.plot(t, abs(r6.real), 'b-', lw=2, label='Vusse model')
+py.plot(x6, y6, 'g--', lw=2, label='Berruti exp')
 py.xlabel('Time (s)')
 py.ylabel('RTD function (1/s)')
-py.title('Figure 6')
+py.title('Berruti 1988, Figure 6')
 py.legend(loc='best', numpoints=1)
 py.grid()
 
 py.figure(3)
-py.plot(t, abs(r7.real), 'b-', lw=2, label='model')
-py.plot(x7, y7, 'g--', lw=2, label='exp')
+py.plot(t, abs(r7.real), 'b-', lw=2, label='Vusse model')
+py.plot(x7, y7, 'g--', lw=2, label='Berruti exp')
 py.xlabel('Time (s)')
 py.ylabel('RTD function (1/s)')
-py.title('Figure 7')
+py.title('Berruti 1988, Figure 7')
+py.legend(loc='best', numpoints=1)
+py.grid()
+
+py.figure(4)
+py.plot(t, abs(r5v.real), 'b-', lw=2, label='Vusse model')
+py.plot(t, abs(r5c.real), 'k-', lw=2, label='CSTR series')
+py.plot(t, abs(r5w.real), 'm-', lw=2, label='Weibull distribution')
+py.plot(x5, y5, 'o', mew=2, mec='g', mfc='none', label='Berruti experiment')
+py.xlabel('Time (s)')
+py.ylabel('RTD (1/s)')
+py.title('Berruti 1988, Figure 5')
 py.legend(loc='best', numpoints=1)
 py.grid()
 
